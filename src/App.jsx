@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import componemntsImg from './assets/components.png';
 import { CORE_CONCEPTS } from './data.js';
 import Header from './components/Header/Header.jsx';
@@ -8,11 +10,13 @@ import TapButton from './components/TapButton/TapButton.jsx';
 
 function App() {
 
-  let tabContent = "Please click a button";
+  const [selectedTopic, setSelectedTopic] = useState("Please click a button");
+  //useState는 React의 Hook 중 하나로, 함수형 컴포넌트에서 상태(state)를 관리할 수 있게 해줌.
+  //useState는 배열을 반환하는데, 첫 번째 요소는 현재 상태의 값이고, 두 번째 요소는 상태를 업데이트하는 함수.
 
   function handleSelect(selectedButton) {
     //sellectedButton => 'Components','JSX','Props','State'
-    tabContent = selectedButton;
+    setSelectedTopic(selectedButton);  // setSelectedTopic은 상태를 업데이트하는 함수
   }
 
   return (
@@ -41,7 +45,7 @@ function App() {
               <TapButton onSelect={() => handleSelect('Props')}>Props</TapButton>
               <TapButton onSelect={() => handleSelect('State')}>State</TapButton>
             </menu>
-            <p>{tabContent}</p>
+            <p>{selectedTopic}</p> {/* 선택된 버튼에 따라 내용이 바뀜 // 기본값: Please click a button */}
           </section>
         </main>
       </div>
