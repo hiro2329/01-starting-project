@@ -1,9 +1,9 @@
-import "./CoreConcept.module.css";
+
 
 
 //props 구조분해할당
-export default function CoreConcept({title, description, image}) {
-  return(
+export default function CoreConcept({ title, description, image }) {
+  return (
     <li>
       <img src={image} alt={title} />
       <h3>{title}</h3>

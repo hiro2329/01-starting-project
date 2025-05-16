@@ -1,67 +1,22 @@
-import { useState } from 'react';
-
-import componemntsImg from './assets/components.png';
-import { CORE_CONCEPTS } from './data.js';
 import Header from './components/Header/Header.jsx';
-import CoreConcept from './components/CoreConcept/CoreConcept.jsx';
-import TapButton from './components/TapButton/TapButton.jsx';
-import { EXAMPLES } from './data.js';
+import CoreConcepts from './components/CoreConcepts.jsx';
+import Examples from './components/Examples.jsx';
 
 
 
 function App() {
 
-  const [selectedTopic, setSelectedTopic] = useState();
-  //useState는 React의 Hook 중 하나로, 함수형 컴포넌트에서 상태(state)를 관리할 수 있게 해줌.
-  //useState는 배열을 반환하는데, 첫 번째 요소는 현재 상태의 값이고, 두 번째 요소는 상태를 업데이트하는 함수.
-
-  function handleSelect(selectedButton) {
-    //sellectedButton => 'components','jsx','props','state'
-    setSelectedTopic(selectedButton);  // setSelectedTopic은 상태를 업데이트하는 함수
-  }
-
-  let tabContent = <p>Please select a topic.</p>;
-
-  if (selectedTopic) {
-    tabContent = (
-      < div id="tab-content" >
-        <h3>{EXAMPLES[selectedTopic].title}</h3>
-        <p>{EXAMPLES[selectedTopic].description}</p>
-        <pre>
-          <code>
-            {EXAMPLES[selectedTopic].code}
-          </code>
-        </pre>
-      </div >
-    );
-  }
-
-
   return (
+    // Fragment : 여러 개의 요소를 그룹화할 때 사용
+    // 여러 부모 요소를 반환할 수 없기 때문에 Fragment로 감싸줌
+    // JS 에서 return문은 하나의 요소만 반환할 수 있음
+    // 그렇기 때문에 Fragment로 감싸줘서 하나의 요소로 만들어줌
     <>
       <Header />
       <div>
         <main>
-          <section id="core-concepts">
-            <h2>Core Concepts</h2>
-            <ul>
-              {CORE_CONCEPTS.map((concept) => (
-                <CoreConcept key={concept.title} {...concept} />
-              ))}
-            </ul>
-          </section>
-          <section id="examples">
-            <h2>Examples</h2>
-            <menu>
-              <TapButton isSelected={selectedTopic === 'components'} onSelect={() => handleSelect('components')}>Components</TapButton>
-              <TapButton isSelected={selectedTopic === 'jsx'} onSelect={() => handleSelect('jsx')}>JSX</TapButton>
-              <TapButton isSelected={selectedTopic === 'props'} onSelect={() => handleSelect('props')}>Props</TapButton>
-              <TapButton isSelected={selectedTopic === 'state'} onSelect={() => handleSelect('state')}>State</TapButton>
-            </menu>
-
-            {tabContent}
-
-          </section>
+          <CoreConcepts />
+          <Examples />
         </main>
       </div>
     </>
